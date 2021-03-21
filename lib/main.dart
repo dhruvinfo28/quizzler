@@ -37,9 +37,9 @@ class _quizzlerAppState extends State<quizzlerApp> {
 
   int currIndex = 0;
   List<Question> questions = [
-    Question(ques: 'A ques whose answer is true', ans: true),
-    Question(ques: 'Question number two', ans: false),
-    Question(ques: 'Question number three', ans: true)
+    Question(question: 'A ques whose answer is true', ans: true),
+    Question(question: 'Question number two', ans: false),
+    Question(question: 'Question number three', ans: true)
   ];
 
   @override
