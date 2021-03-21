@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'questions.dart';
 
 void main() => runApp(MyApp());
 
@@ -34,10 +35,12 @@ class _quizzlerAppState extends State<quizzlerApp> {
     }
   }
 
-  List<String> questions = ['What is your name', 'Answer is false'];
-  List<bool> answers = [true, false];
-
-  int currIndex = 0; //Stores the index of displayed question
+  int currIndex = 0;
+  List<Question> questions = [
+    Question(question: 'A ques whose answer is true', ans: true),
+    Question(question: 'Question number two', ans: false),
+    Question(question: 'Question number three', ans: true)
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,7 @@ class _quizzlerAppState extends State<quizzlerApp> {
         Expanded(
           child: Center(
             child: Text(
-              questions[currIndex],
+              questions[currIndex].question,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20.0,
@@ -62,7 +65,7 @@ class _quizzlerAppState extends State<quizzlerApp> {
             onPressed: () {
               setState(() {
                 //Means user submitted answer to question at currIndex as true
-                if (answers[currIndex]) {
+                if (questions[currIndex].ans) {
                   addResponse(1);
                 } else {
                   addResponse(0);
@@ -85,7 +88,7 @@ class _quizzlerAppState extends State<quizzlerApp> {
           child: TextButton(
             onPressed: () {
               setState(() {
-                if (!answers[currIndex]) {
+                if (!questions[currIndex].ans) {
                   addResponse(1);
                 } else {
                   addResponse(0);
