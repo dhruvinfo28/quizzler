@@ -2,7 +2,7 @@ class Question {
   String question;
   bool ans;
   //Constructor
-  Question({this.question, this.ans});
+  Question(this.question, this.ans);
   //Call like Question a = Question.unanswered(question: 'I don't have an answer')
   Question.unanswered({this.question});
 }
