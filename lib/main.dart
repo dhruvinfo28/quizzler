@@ -65,8 +65,7 @@ class _quizzlerAppState extends State<quizzlerApp> {
                 } else {
                   addResponse(0);
                 }
-                questionBank.nextQuestion();
-                //TODO if all questions are done , try something else
+                questionBank.nextQuestion(context, scoreKeeper);
               });
             },
             child: Text(
@@ -88,7 +87,7 @@ class _quizzlerAppState extends State<quizzlerApp> {
                 } else {
                   addResponse(0);
                 }
-                questionBank.nextQuestion();
+                questionBank.nextQuestion(context, scoreKeeper);
               });
             },
             child: Text(
@@ -110,3 +109,20 @@ class _quizzlerAppState extends State<quizzlerApp> {
 //One thing to notice is that we can still change answers to questions from main.dart and that should not happen ,
 // hence we make the questions a private member in Quizz class, a property of a class can be made private by adding an
 // underscore in the front
+
+//Understanding polymorphism
+//Suppose a class inherits from a parent and we want a different implementation for a method we inherited from the base
+//class , here is when polymorphism comes into play
+//We use @override above the method implementation
+//class Car {
+//   int seats = 5;
+//   void drive(){print('Wheels turn');
+// }
+
+//class FloatingCar extends Car{
+//
+//  @override
+//  void drive(){ super.drive(); print('Car glides'); }  // Here we improved the functionality of drive
+//                                                          that was inherited from the base class, we could simply
+//                                                          remove it too by not calling super.drive();
+// }

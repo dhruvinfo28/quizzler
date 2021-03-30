@@ -1,4 +1,5 @@
 import 'questions.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Quizz {
   int _questionNumber = 0;
@@ -31,9 +32,14 @@ class Quizz {
         true),
   ];
 
-  void nextQuestion() {
+  void nextQuestion(context, scoreKeeper) {
     if (_questionNumber < _questions.length - 1) {
       _questionNumber++;
+    } else {
+      Alert(context: context, title: "End of quiz", desc: "Flutter is awesome.")
+          .show();
+      _questionNumber = 0;
+      scoreKeeper.clear();
     }
   }
 
