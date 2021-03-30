@@ -1,7 +1,9 @@
 import 'questions.dart';
 
 class Quizz {
-  List<Question> questions = [
+  int _questionNumber = 0;
+
+  List<Question> _questions = [
     Question('Some cats are actually allergic to humans', true),
     Question('You can lead a cow down stairs but not up stairs.', false),
     Question('Approximately one quarter of human bones are in the feet.', true),
@@ -28,4 +30,18 @@ class Quizz {
         'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',
         true),
   ];
+
+  void nextQuestion() {
+    if (_questionNumber < _questions.length - 1) {
+      _questionNumber++;
+    }
+  }
+
+  String getQuestionText() {
+    return _questions[_questionNumber].question;
+  }
+
+  bool getAnswer() {
+    return _questions[_questionNumber].ans;
+  }
 }
