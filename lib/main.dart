@@ -30,13 +30,11 @@ class _quizzlerAppState extends State<quizzlerApp> {
     //submission = 1 for correct and 0 for incorrect
     if (submission == 1) {
       scoreKeeper.add(Icon(Icons.check, color: Colors.green));
-      print('here2');
     } else {
       scoreKeeper.add(Icon(Icons.close, color: Colors.red));
     }
   }
 
-  int currIndex = 0;
   Quizz questionBank = Quizz();
 
   @override
@@ -47,7 +45,7 @@ class _quizzlerAppState extends State<quizzlerApp> {
         Expanded(
           child: Center(
             child: Text(
-              questionBank.questions[currIndex].question,
+              questionBank.getQuestionText(),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20.0,
@@ -62,13 +60,12 @@ class _quizzlerAppState extends State<quizzlerApp> {
             onPressed: () {
               setState(() {
                 //Means user submitted answer to question at currIndex as true
-                if (questionBank.questions[currIndex].ans) {
+                if (questionBank.getAnswer()) {
                   addResponse(1);
                 } else {
                   addResponse(0);
                 }
-                currIndex++;
-                //TODO if all questions are done , try something else
+                questionBank.nextQuestion(context, scoreKeeper);
               });
             },
             child: Text(
@@ -85,12 +82,12 @@ class _quizzlerAppState extends State<quizzlerApp> {
           child: TextButton(
             onPressed: () {
               setState(() {
-                if (!questionBank.questions[currIndex].ans) {
+                if (!questionBank.getAnswer()) {
                   addResponse(1);
                 } else {
                   addResponse(0);
                 }
-                currIndex++;
+                questionBank.nextQuestion(context, scoreKeeper);
               });
             },
             child: Text(
@@ -108,3 +105,24 @@ class _quizzlerAppState extends State<quizzlerApp> {
     );
   }
 }
+
+//One thing to notice is that we can still change answers to questions from main.dart and that should not happen ,
+// hence we make the questions a private member in Quizz class, a property of a class can be made private by adding an
+// underscore in the front
+
+//Understanding polymorphism
+//Suppose a class inherits from a parent and we want a different implementation for a method we inherited from the base
+//class , here is when polymorphism comes into play
+//We use @override above the method implementation
+//class Car {
+//   int seats = 5;
+//   void drive(){print('Wheels turn');
+// }
+
+//class FloatingCar extends Car{
+//
+//  @override
+//  void drive(){ super.drive(); print('Car glides'); }  // Here we improved the functionality of drive
+//                                                          that was inherited from the base class, we could simply
+//                                                          remove it too by not calling super.drive();
+// }
